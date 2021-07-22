@@ -1,4 +1,6 @@
-int fun(string s,int i,int j,bool isTrue,map<string,int> &mp)
+map<string,int> mp;
+
+int fun(string s,int i,int j,bool isTrue)
     {
         if(i>j)
         {
@@ -26,16 +28,16 @@ int fun(string s,int i,int j,bool isTrue,map<string,int> &mp)
         {
             string x=to_string(i)+to_string(k-1)+to_string(true);
             if(mp.find(x)==mp.end())
-             mp[x]=fun(s,i,k-1,true,mp);
+             mp[x]=fun(s,i,k-1,true);
              string y=to_string(i)+to_string(k-1)+to_string(false);
             if(mp.find(y)==mp.end())
-             mp[y]=fun(s,i,k-1,false,mp);
+             mp[y]=fun(s,i,k-1,false);
              string z=to_string(k+1)+to_string(j)+to_string(true);
              if(mp.find(z)==mp.end())
-             mp[z]=fun(s,k+1,j,true,mp);
+             mp[z]=fun(s,k+1,j,true);
              string w=to_string(k+1)+to_string(j)+to_string(false);
              if(mp.find(w)==mp.end())
-             mp[w]=fun(s,k+1,j,false,mp);
+             mp[w]=fun(s,k+1,j,false);
              int lt=mp[x],lf=mp[y],rt=mp[z],rf=mp[w];
             if(s[k]=='&')
             {
@@ -78,8 +80,7 @@ int fun(string s,int i,int j,bool isTrue,map<string,int> &mp)
         
     }
 int Solution::cnttrue(string S) {
-    int i=0,j=S.size()-1;
-        map<string,int> mp;
-        bool isTrue=true;
-        return fun(S,i,j,isTrue,mp);
+    int i=0,j=S.size()-1; 
+    bool isTrue=true;
+    return fun(S,i,j,isTrue);
 }
