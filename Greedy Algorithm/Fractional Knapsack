@@ -1,87 +1,54 @@
-#include <bits/stdc++.h>
-  
+#include <iostream>
+#include <vector>
+#include<bits/stdc++.h>
+
 using namespace std;
-  
-// Structure for an item which stores
-// weight & corresponding value of Item
 
-struct Item {
-    int value, weight;
-  
-    // Constructor
-    Item(int value, int weight)
-        : value(value), weight(weight)
-    {
-    }
-};
-  
-// Comparison function to sort Item
-// according to val/weight ratio
 
-bool cmp(struct Item a, struct Item b)
-{
-    double r1 = (double)a.value / a.weight;
-    double r2 = (double)b.value / b.weight;
-    return r1 > r2;
-}
-  
-// Main greedy function to solve problem
-double fractionalKnapsack(struct Item arr[],
-                          int N, int size)
-{
-    // Sort Item on basis of ratio
-    sort(arr, arr + size, cmp);
-  
-    // Current weight in knapsack
-    int curWeight = 0;
-  
-    // Result (value in Knapsack)
-    double finalvalue = 0.0;
-  
-    // Looping through all Items
-    for (int i = 0; i < size; i++) {
-  
-        // If adding Item won't overflow,
-        // add it completely
-        if (curWeight + arr[i].weight <= N) {
-            curWeight += arr[i].weight;
-            finalvalue += arr[i].value;
-        }
-  
-        // If we can't add current Item,
-        // add fractional part of it
-        else {
-            int remain = N - curWeight;
-            finalvalue += arr[i].value
-                          * ((double)remain
-                             / arr[i].weight);
-  
-            break;
-        }
-    }
-  
-    // Returning final value
+int minWays(int arr[],int n,int amount){
     
-    return finalvalue;
 }
-  
-// Driver Code
 
 int main()
 {
-    // Weight of knapsack
-    int N = 60;
-  
-    // Given weights and values as a pairs
-    Item arr[] = { { 100, 10 },
-                   { 280, 40 },
-                   { 120, 20 },
-                   { 120, 24 } };
-  
-    int size = sizeof(arr) / sizeof(arr[0]);
-  
-    // Function Call
-    cout << "Maximum profit earned = "
-         << fractionalKnapsack(arr, N, size);
+    
+    int n;
+    cin>>n;
+    
+    int w;
+    cin>>w;
+    
+    vector<vector<int>> v;
+    for(int i=0;i<n;i++){
+        int value,weight;
+        cin>>value>>weight;
+        v.push_back({value,weight});
+    }
+    
+    sort(v.begin(),v.end(),[&](vector<int> &a,vector<int> &b){
+        double v1 = (double)a[0]/(double)a[1];
+        double v2 = (double)b[0]/(double)b[1];
+        return v1>v2;
+    });
+    
+    int ans=0;
+    
+    for(int i=0;i<n;i++){
+        if(v[i][1]<=w){
+            w-=v[i][1];
+            ans+=v[i][0];
+            continue;
+        }
+        
+        double vw = (double) v[i][0]/ (double) v[i][1];
+        ans += vw*w;
+        w = 0;
+        break;
+    }
+    
+    cout<<ans;
+    
     return 0;
 }
+
+
