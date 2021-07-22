@@ -1,6 +1,4 @@
-map<string,int> mp;
-
-int fun(string s,int i,int j,bool isTrue)
+int fun(string s,int i,int j,bool boole,map<string,int> &mp)
     {
         if(i>j)
         {
@@ -8,7 +6,7 @@ int fun(string s,int i,int j,bool isTrue)
         }
         if (i==j)
         {
-            if(isTrue==true)
+            if(boole==true)
             return s[i]=='T';
             else
             return s[i]=='F';
@@ -18,7 +16,7 @@ int fun(string s,int i,int j,bool isTrue)
         temp.push_back(' ');
         temp.append(to_string(j));
         temp.push_back(' ');
-        temp.append(to_string(isTrue));
+        temp.append(to_string(boole));
         if(mp.find(temp)!=mp.end())
         {
             return mp[temp];
@@ -28,20 +26,20 @@ int fun(string s,int i,int j,bool isTrue)
         {
             string x=to_string(i)+to_string(k-1)+to_string(true);
             if(mp.find(x)==mp.end())
-             mp[x]=fun(s,i,k-1,true);
+             mp[x]=fun(s,i,k-1,true,mp);
              string y=to_string(i)+to_string(k-1)+to_string(false);
             if(mp.find(y)==mp.end())
-             mp[y]=fun(s,i,k-1,false);
+             mp[y]=fun(s,i,k-1,false,mp);
              string z=to_string(k+1)+to_string(j)+to_string(true);
              if(mp.find(z)==mp.end())
-             mp[z]=fun(s,k+1,j,true);
+             mp[z]=fun(s,k+1,j,true,mp);
              string w=to_string(k+1)+to_string(j)+to_string(false);
              if(mp.find(w)==mp.end())
-             mp[w]=fun(s,k+1,j,false);
+             mp[w]=fun(s,k+1,j,false,mp);
              int lt=mp[x],lf=mp[y],rt=mp[z],rf=mp[w];
             if(s[k]=='&')
             {
-                if(isTrue==true)
+                if(boole==true)
                 {
                     ans=(ans+lt*rt)%1003;
                 }
@@ -52,7 +50,7 @@ int fun(string s,int i,int j,bool isTrue)
             }
             else if(s[k]=='|')
             {
-                if(isTrue==true)
+                if(boole==true)
                 {
                     ans=(ans+lt*rt+lt*rf+lf*rt)%1003;
                 }
@@ -63,7 +61,7 @@ int fun(string s,int i,int j,bool isTrue)
             }
             else if(s[k]=='^')
             {
-                if(isTrue==true)
+                if(boole==true)
                 {
                     ans=(ans+lt*rf+lf*rt)%1003;
                 }
@@ -80,7 +78,8 @@ int fun(string s,int i,int j,bool isTrue)
         
     }
 int Solution::cnttrue(string S) {
-    int i=0,j=S.size()-1; 
-    bool isTrue=true;
-    return fun(S,i,j,isTrue);
+    int i=0,j=S.size()-1;
+        map<string,int> mp;
+        bool boole=true;
+        return fun(S,i,j,boole,mp);
 }
