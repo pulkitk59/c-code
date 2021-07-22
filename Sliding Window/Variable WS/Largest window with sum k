@@ -1,0 +1,42 @@
+#include <iostream>
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+
+int largestSubArray(int arr[],int n,int k)
+{
+        
+    int i=0;
+    int j=0;
+    int sum=0;
+    int mx=INT_MIN;
+    
+    while(j<n){
+        sum += arr[j];
+        if(sum<k){
+            j++;
+        }else if(sum==k){
+            mx=max(mx,j-i);
+        }else{
+            while(sum>k){
+                sum-=arr[i];
+                i++;
+            }
+        }
+        j++;
+    }
+    return mx;
+}
+
+int main()
+{
+    int A[] = {4, 1, 1, 1, 2, 3, 5,};
+    int n=sizeof(A)/sizeof(A[0]);
+    int k=7;
+    cout << largestSubArray(A,n,k);
+    
+     
+    return 0;
+}
