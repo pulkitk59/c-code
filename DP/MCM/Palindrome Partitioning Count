@@ -22,7 +22,7 @@ public:
     
     
     
-    int solve(string s,int i,int j){
+    int solve(string &s,int i,int j){
     if(i>=j){
         return 0;
     }
