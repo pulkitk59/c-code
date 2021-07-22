@@ -1,3 +1,6 @@
+// Same code for insertion and deletion
+
+
 #include <iostream>
 #include <bits/stdc++.h>
 
