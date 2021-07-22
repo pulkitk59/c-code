@@ -4,6 +4,7 @@ using namespace std;
   
 // Structure for an item which stores
 // weight & corresponding value of Item
+
 struct Item {
     int value, weight;
   
@@ -16,6 +17,7 @@ struct Item {
   
 // Comparison function to sort Item
 // according to val/weight ratio
+
 bool cmp(struct Item a, struct Item b)
 {
     double r1 = (double)a.value / a.weight;
@@ -59,10 +61,12 @@ double fractionalKnapsack(struct Item arr[],
     }
   
     // Returning final value
+    
     return finalvalue;
 }
   
 // Driver Code
+
 int main()
 {
     // Weight of knapsack
