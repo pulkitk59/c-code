@@ -15,9 +15,7 @@ int longestSubstring(string s)
     
     while(j<s.length()){
         mp[s[j]]++;
-        if(mp.size()>j-i+1){
-            j++;
-        }else if(mp.size()==j-i+1){
+        if(mp.size()==j-i+1){
             mx=max(mx,j-i+1);
             j++;
         }else{
