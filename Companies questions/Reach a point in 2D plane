@@ -1,0 +1,102 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+bool goal(string s,int A,int B, int x, int y){
+    
+    if(x==A && y==B){
+        return true;
+    }
+    
+    
+    if(abs(x)<=abs(A) && abs(y)<=abs(B) && s.length()!=0){
+        
+        if(s.at(0)=='U' && (B-y)>0){
+        if(goal(s,A,B,x,y+1)){
+            return true;
+        }else{
+            if(s.length()==1){
+                return false;
+            }else{
+                s.erase(s.begin()+0);
+                return goal(s,A,B,x,y);
+            }
+        }
+    }else if(s.at(0)=='U' && (B-y)<=0){
+        s.erase(s.begin()+0);
+        return goal(s,A,B,x,y);
+    }
+    
+    if(s.at(0)=='D' && (B-y)<0){
+        if(goal(s,A,B,x,y-1)){
+            return true;
+        }else{
+            if(s.length()==1){
+                return false;
+            }else{
+                s.erase(s.begin()+0);
+                return goal(s,A,B,x,y);
+            }
+        }
+    }else if(s.at(0)=='D' && (B-y)>=0){
+        s.erase(s.begin()+0);
+        return goal(s,A,B,x,y);
+    }
+    
+    if(s.at(0)=='L' && (A-x)<0){
+        if(goal(s,A,B,x-1,y)){
+            return true;
+        }else{
+            if(s.length()==1){
+                return false;
+            }else{
+                s.erase(s.begin()+0);
+                return goal(s,A,B,x,y);
+            }
+        }
+    }else if(s.at(0)=='L' && (A-x)>=0){
+        s.erase(s.begin()+0);
+        return goal(s,A,B,x,y);
+    }
+    
+    if(s.at(0)=='R' && (A-x)>0){
+        if(goal(s,A,B,x+1,y)){
+            return true;
+        }else{
+            if(s.length()==1){
+                return false;
+            }else{
+                s.erase(s.begin()+0);
+                return goal(s,A,B,x,y);
+            }
+        }
+    }else if(s.at(0)=='R' && (A-x)<=0){
+        s.erase(s.begin()+0);
+        return goal(s,A,B,x,y);
+    }  
+    }
+    
+    return false;
+}
+
+
+int main()
+{
+    int A;
+    int B;
+    int x=0;
+    int y=0;
+    string s = "";
+    cin>>A>>B;
+    cin>>s;
+    
+    if(goal(s,A,B,x,y)){
+        cout<<"Yes";
+    }else{
+       cout<<"No"; 
+    }
+    
+
+    return 0;
+}
