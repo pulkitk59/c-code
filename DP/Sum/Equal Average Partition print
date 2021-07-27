@@ -1,3 +1,4 @@
+#include <bits/stdc++.h>
 using namespace std;
 
 bool check(int ind, int sum, int element, vector<int>&A, 
@@ -43,13 +44,27 @@ int main() {
             if(check(0, ss, i, A, dp, res)) {
                 for(auto it:res)
                     cout << it << " "; 
-                // self code can be written for finding 
-                // the second partition 
+                
+                int i = 0;
+                int j = 0;
+                while(i<A.size()){
+                    while(j<res.size()){
+                        if(A[i]!=res[j]){
+                            cout<<A[i]<<" ";
+                            i++;
+                        }else{
+                            i++;
+                            j++;
+                        }
+                    }
+                }
+		
                 return 0; 
             }
         }
     }
-        
+    
+    
     cout << -1; 
 	
 }
